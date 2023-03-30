@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: retail
+    database: retail
+    schema: retail
+    tables: 
+      - name: raw_1992_data
+      - name: raw_1993_data
+      - name: raw_1994_data
+      - name: raw_1995_data
+      - name: raw_1996_data
+      - name: raw_1997_data
+      - name: raw_1998_data
+      - name: raw_1999_data
+      - name: raw_2000_data
+      - name: raw_2001_data
+      - name: raw_2002_data
+      - name: raw_2003_data
+      - name: raw_2004_data
+      - name: raw_2005_data
+      - name: raw_2006_data
+      - name: raw_2007_data
+      - name: raw_2008_data
+      - name: raw_2009_data
+      - name: raw_2010_data
+      - name: raw_2011_data
+      - name: raw_2012_data
+      - name: raw_2013_data
+      - name: raw_2014_data
+      - name: raw_2015_data
+      - name: raw_2016_data
+      - name: raw_2017_data
+      - name: raw_2018_data
+      - name: raw_2019_data
+      - name: raw_2020_data
+      - name: raw_2021_data
+      - name: raw_2022_data

@@ -1,0 +1,58 @@
+version: "3.7"
+
+services:
+
+  postgres_db:
+    container_name: postgres_container
+    platform: linux/amd64
+    image: postgres:15
+    restart: always
+    env_file:
+      - ./docker/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pg-admin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - ./docker/.env
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    ports:
+      - "5050:5050"
+
+  python_el:
+    container_name: python_el
+    build: docker/extract_load/.
+    image: python_el
+    env_file:
+      - ./docker/.env
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+  dbt:
+    container_name: dbt
+    build: docker/dbt/.
+    image: dbt-dev
+    env_file:
+      - ./docker/.env
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      python_el:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:
