@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: retail_source
+    database: retail
+    schema: retail
+    tables: '{{ var("raw_data_tables") }}'
+
+

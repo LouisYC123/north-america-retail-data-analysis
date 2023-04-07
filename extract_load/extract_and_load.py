@@ -2,6 +2,7 @@
 import pandas as pd
 import os
 from pathlib import Path
+from datetime import datetime
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 
@@ -27,8 +28,14 @@ data = pd.read_excel(
 print('loading data to postgres')
 for sheetname, df in data.items():
     if sheetname != '2023':
-        df.to_sql(
-            f'raw_{sheetname}_data', engine, index=False, if_exists="replace", schema=POSTGRES_SCHEMA
-        )
+        df['load_timestamp'] = datetime.now()
+        try: # using try/catch here as there may be views depending on table so would error if if_exists="replace"
+            df.to_sql(
+                f'raw_{sheetname}_data', engine, index=False, if_exists="fail", schema=POSTGRES_SCHEMA
+            )
+        except ValueError:
+            print(f'{sheetname} data already loaded')
+
+
 
 print('load complete')
