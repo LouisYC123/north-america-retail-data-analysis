@@ -1,4 +1,4 @@
-test_dbt_project:
+us_retail_analysis:
   target: dev
   outputs:
     dev:
@@ -7,6 +7,6 @@ test_dbt_project:
       user: postgres
       password: postgres
       port: 5432
-      dbname: postgres
+      dbname: retail
       schema: retail
       threads: 1
