@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  # Sources
+  - name: src_union_raw
+    description: A UNION ALL of all raw data tables from years 1992 to 2022. All columns are cast to TEXT.
+    columns:
+      - name: year
+        description: Year the row pertains to.
+      - name: naics_code
+        description:  North American Industry Classification System. standard used by Federal statistical agencies in classifying business establishments for the purpose of collecting, analyzing, and publishing statistical data related to the U.S. business economy.
+      - name: type_of_business
+        description: Descrption of the type of business
+      - name: Jan
+        description: January data
+      - name: Feb
+        description: February data
+      - name: Mar
+        description: March data
+      - name: Apr
+        description: April data
+      - name: May
+        description: May data
+      - name: Jun
+        description: June data
+      - name: Jul
+        description: July data
+      - name: Aug
+        description: August data
+      - name: Sep
+        description: September data
+      - name: Oct
+        description: October data
+      - name: Nov
+        description: November data
+      - name: Dec
+        description: December data
+
