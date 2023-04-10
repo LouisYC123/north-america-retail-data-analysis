@@ -36,3 +36,36 @@ models:
       - name: Dec
         description: December data
 
+  # Stage
+  - name: stg_unpivot
+    description: Unpivoted version of src_union_raw
+
+  - name: stg_unpivot_clean
+    description: Cleaned version of stg_unpivot, with correct data type casting and conversion of '(NA)' to NULL
+    columns:
+      - name: sales_month
+        description: timestamp for each record
+        tests: 
+          - not_null:
+              config:
+                severity: warn
+      - name: naics_code
+        description: string-list of naics codes for record
+        tests: 
+          - not_null:
+              config:
+                severity: warn
+      - name: type_of_business
+        description: description of business types for record
+        tests: 
+          - not_null:
+              config:
+                severity: warn
+      - name: sales
+        description: sales amount in USD ($)
+      - name: load_timestamp
+        description: timestamp for when data was loaded
+        tests: 
+          - not_null:
+              config:
+                severity: warn
