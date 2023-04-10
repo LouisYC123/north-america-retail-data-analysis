@@ -13,7 +13,7 @@
                 {% elif column.name == 'load_timestamp' %}
                     , "{{ column.name }}"::TEXT AS "load_timestamp"
                 {% else %}
-                    , "{{ column.name }}"::TEXT AS "{{column.name[:3]}}"
+                    , "{{ column.name }}"::TEXT AS "{{column.name[:3].lower()}}"
                 {% endif %}
             {% endif %}
         {%- endfor %}
