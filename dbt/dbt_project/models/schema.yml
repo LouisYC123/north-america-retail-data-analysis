@@ -64,7 +64,7 @@ models:
       - name: sales
         description: sales amount in USD ($)
       - name: load_timestamp
-        description: timestamp for when data was loaded
+        description: timestamp for when data was loaded in Australian Eastern Standard Time (AEST)
         tests: 
           - not_null:
               config:
