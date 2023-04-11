@@ -11,6 +11,6 @@ SELECT DISTINCT
         WHEN sales = '(S)' THEN NULL 
         ELSE sales::INTEGER
     END AS sales
-    , load_timestamp::TIMESTAMP
+    , load_timestamp::TIMESTAMP AT TIME ZONE 'aest' AS load_timestamp
 FROM 
     stage
