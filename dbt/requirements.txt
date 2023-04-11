@@ -1,2 +1,6 @@
 dbt-postgres==1.4.1
 pytz==2023.2
+ipykernel
+pandas
+matplotlib
+sqlalchemy
