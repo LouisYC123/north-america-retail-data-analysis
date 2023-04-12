@@ -1,14 +1,17 @@
 WITH source AS (
-    SELECT * FROM {{ ref('stg_unpivot_clean') }}
+    SELECT * FROM {{ ref('int_women_v_men_monthly_totals') }}
 )
 
-SELECT 
-	sales_month
-	, type_of_business 
-	, sales 
-	, SUM(sales) OVER(PARTITION BY sales_month) AS total_sales
-	, sales * 100 / sum(sales) OVER(PARTITION BY sales_month) as pct_total
+SELECT
+    sales_month
+    , {{ dbt_utils.pivot(
+        'type_of_business',
+        ['mens_clothing_stores', 'womens_clothing_stores'],
+        agg='sum',
+        then_value='pct_total',
+        suffix='_pct_total'
+    ) }}
 FROM 
-	source
-WHERE 
-	type_of_business IN ('Men''s clothing stores', 'Women''s clothing stores')
+    source
+GROUP BY 
+    1
