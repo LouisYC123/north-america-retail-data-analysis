@@ -20,8 +20,10 @@
     FROM 
         {{ source('retail_source', src.name) }}
     WHERE 
-        "Unnamed: 0" IS NOT NULL
+        "Unnamed: 1" NOT IN ('ADJUSTED(2)', 'NOT ADJUSTED')
         AND "Unnamed: 1" IS NOT NULL
 
     {{ 'union all' if not loop.last }}
 {% endfor %}
+
+ 
