@@ -38,19 +38,31 @@ models:
 
   # Stage
   - name: stg_unpivot
-    description: Unpivoted version of src_union_raw
+    description: Unpivoted version of src_union_raw, with month columns unpivoted to month rows.
+    columns:
+      - name: year
+        description: year of the sales record
+      - name: naics_code
+        description:  North American Industry Classification System. standard used by Federal statistical agencies in classifying business establishments for the purpose of collecting, analyzing, and publishing statistical data related to the U.S. business economy.
+      - name: type_of_business
+        description: Descrption of the type of business
+      - name: load_timestamp
+        description: Timestamp of when the data was loaded
+      - name: month
+        description: month of the sales record
+      - name: sales data in $ USD 
 
   - name: stg_unpivot_clean
     description: Cleaned version of stg_unpivot, with correct data type casting and conversion of '(NA)' to NULL
     columns:
       - name: sales_month
-        description: timestamp for each record
+        description: date of each sales record
         tests: 
           - not_null:
               config:
                 severity: warn
       - name: naics_code
-        description: string-list of naics codes for record
+        description: string-list of naics (North American Industry Classification System) codes for record
         tests: 
           - not_null:
               config:
@@ -69,3 +81,72 @@ models:
           - not_null:
               config:
                 severity: warn
+
+  # Marts
+  - name: mart_1992_index_clothing_and_sports
+    description: Contains percentage change from 1992 index for mens and womens clothing and sports stores.
+    columns:
+      - name: sales_year
+      - name: mens_clothing_stores
+        description: Mens clothing sales % change from 1992 index
+      - name: womens_clothing_stores
+        description: Womens clothing sales % change from 1992 index
+      - name: sporting_goods
+        description: Sport store sales % change from 1992 index
+
+  - name: mart_12m_ma_womens_clothing
+    description: 12 month moving average of womens clothing sales
+    columns:
+      - name: sales_month
+        description: date of record
+      - name: sales
+        description: sales in $ USD 
+      - name: moving_avg
+        description: 12 month moving average of womens clothing sales
+      - name: records_count 
+
+  - name: mart_1992_index_of_clothing_stores
+    description: Contains percentage change from 1992 index for mens and womens clothing
+    columns:
+      - name: sales_year
+      - name: mens_clothing_stores
+        description: Mens clothing sales % change from 1992 index
+      - name: womens_clothing_stores
+        description: Womens clothing sales % change from 1992 index
+
+  - name: mart_book_stores_sales_by_month
+    description: Average sales per month for book stores 
+    columns:
+      - name: month_num
+        description: Month number (1-12)
+      - name: avg_sales
+        description: Average sales for the month
+
+  - name: mart_comparing_leisure_activities
+    description: Data mart conbtaining total sales per year for Book stores, Sporting goods stores and Hobby, toy, and game stores
+
+  - name: mart_retail_sales_by_month
+    description: A mart for sales per month for all businesses that fall under the Retail and food services business type
+    columns:
+      - name: sales_month
+        description: Date for sales record
+      - name: sales
+        description: Sales amount in $ USD
+
+  - name: mart_retail_sales_by_year
+    description: mart_retail_sales_by_month aggregated to the year level
+    columns:
+      - name: sales_year
+        description: Year of the sales record
+      - name: sales
+        description: Sales amount in $ USD
+
+  - name: mart_women_v_men_clothing
+    description: A mart containing seperate columns for mens and womens clothing sales per year.
+    columns:
+      - name: sales_year
+        description: Year of the sales record
+      - name: Men's clothing stores
+        description: Total sales per year for mens clothing
+      - name: Women's clothing stores
+        description: Total sales per year for womens clothing
