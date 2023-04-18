@@ -3,7 +3,7 @@ WITH source AS (
 )
 
 SELECT
-	date_part('month', sales_month)
+	date_part('month', sales_month) as month_num
 	, round(avg(sales), 2) as avg_sales
 FROM 
 	source
