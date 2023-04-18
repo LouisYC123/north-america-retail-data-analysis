@@ -46,3 +46,5 @@ dbt --profiles-dir profiles docs generate
 
 view documentation via browser:  
 dbt --profiles-dir profiles docs serve  
+
+<img width="1449" alt="retail_data_lineage" src="https://user-images.githubusercontent.com/97873724/232691806-58c69e3b-3f04-447f-93ce-0cd8f61f47a8.png">
